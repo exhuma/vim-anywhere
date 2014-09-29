@@ -22,7 +22,7 @@ err() {
 # $2 A message which will be printed out on stderr if the file does not exist.
 require_file_exists() {
   if [ ! -e $1 ]; then
-    err "$1 does not exist. $2"
+    err "$1 does not exist. ${@:2}"
     exit 1
   fi
 } # }}}
@@ -49,12 +49,13 @@ TMPFILE=$(mktemp /tmp/vim-anywhere-doc-XXXXXX)
 trap "{ rm -f $TMPFILE; }" EXIT
 
 # Linux
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
+if [[ $OSTYPE == "linux-gnu" ]]; then
+  chmod o-r $TMPFILE # Make file only readable by you
   gvim --nofork $TMPFILE
   cat $TMPFILE | xclip -selection clipboard
 
 # OSX
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+elif [[ $OSTYPE == "darwin"* ]]; then
   # if there is no path file, it must have been deleted or the installer failed
   require_file_exists $AW_PATH/.path \
     "Please reinstall vim-anywhere."
@@ -63,7 +64,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   mvim_path=$(cat $AW_PATH/.path)
 
   require_file_exists $mvim_path \
-    "mvim must have been move or uninstalled.\nPlease make sure it is "\
+    "mvim must have been move or uninstalled.\nPlease make sure it is " \
     "available in your path and then reinstall vim-anywhere."
 
   $mvim_path --nofork $TMPFILE
