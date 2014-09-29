@@ -1,4 +1,4 @@
-# vim-anywhere [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cknadler/vim-anywhere/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+# vim-anywhere
 
 Sometimes, you edit text outside of Vim. These are sad times. Enter
 vim-anywhere!
@@ -47,7 +47,7 @@ for details.
 
 __OSX:__ ( default = unbound, suggested = `ctrl+cmd+v` )
 
-They keyboard shortcut for invoking vim-anywhere is unbound by default on OSX.
+The keyboard shortcut for invoking vim-anywhere is unbound by default on OSX.
 The installation script will automatically open
 `System Preferences > Keyboard > Shortcuts`. Fill in the following:
 
